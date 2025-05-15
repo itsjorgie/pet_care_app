@@ -21,8 +21,8 @@
             <input type="text" name="species" placeholder="Species" required>
             <input type="text" name="breed" placeholder="Breed" required>
             <input type="hidden" name="user_id" value="{{ user_id }}">
-            <button type="submit" class="btn">{% if pet %}Update{% else %}Create{% endif %}</button>
-            <a href="{% url 'user_dashboard' %}" class="btn">Cancel</a>
+            <button type="submit" class="btn btn-save">{% if pet %}Update{% else %}Create{% endif %}</button>
+            <a href="{% url 'user_dashboard' %}" class="btn btn-cancel">Cancel</a>
         </form>
 
     </div>
