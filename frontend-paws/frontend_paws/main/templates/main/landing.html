@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/pet.png' %}">
+    <title>Petcare App</title>
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        
+        <h1>Pet Care App</h1>
+        <p>Your all-in-one solution for managing pet registrations and veterinary appointments.</p>
+        <a class="btn" href="{% url 'register' %}">Register</a>
+        <a class="btn" href="{% url 'login' %}">Login</a>
+    </div>
+</body>
+</html>

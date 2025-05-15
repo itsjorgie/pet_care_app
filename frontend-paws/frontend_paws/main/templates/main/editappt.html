@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/pet.png' %}">
+    <title>Edit Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/css/editappt.css' %}">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2>Edit Appointment</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="appointment_date">Appointment Date</label>
+            <input type="text" id="appointment_date" name="appointment_date" placeholder="mm/dd/yyyy" value="{{ appointment.appointment_date }}">
+        </div>
+        <div class="form-group">
+            <label for="appointment_time">Appointment Time</label>
+            <input type="text" id="appointment_time" name="appointment_time" placeholder="HH:MM AM/PM" value="{{ appointment.appointment_time }}">
+        </div>
+        <div class="form-group">
+            <label for="reason">Reason</label>
+            <textarea id="reason" name="reason">{{ appointment.reason }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-update d-block w-100 mb-2">Update Appointment</button>
+        <a href="{% url 'user_dashboard' %}" class="btn btn-cancel d-block w-100">Cancel</a>
+    </form>
+
+</div>
+
+</body>
+</html>

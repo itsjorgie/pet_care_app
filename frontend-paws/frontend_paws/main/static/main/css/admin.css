@@ -1,0 +1,104 @@
+/* Font and general reset */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f8fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Main layout container */
+.layout {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #2a5d88;
+    padding-bottom: 1rem;
+}
+
+.header h1 {
+    color: #2a5d88;
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 2rem;
+}
+
+.section h2 {
+    color: #4682b4;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+table th, table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+table th {
+    background-color: #f0f8ff;
+    color: #2a5d88;
+    font-weight: 600;
+}
+
+table td {
+    background-color: #fff;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #4682b4;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+.btn:hover {
+    background-color: #356a94;
+}
+
+.btn-logout {
+    background-color: #f8f9fa;
+    color: #2a5d88;
+    border: 1px solid #2a5d88;
+}
+
+.btn-logout:hover {
+    background-color: #e2e6ea;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}

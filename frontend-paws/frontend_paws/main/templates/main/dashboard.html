@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/pet.png' %}">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/css/admin.css' %}">
+
+</head>
+<body>
+<div class="layout">
+    <div class="header">
+        <h1>Dashboard</h1>
+        <a class="btn btn-logout" href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <div class="section">
+        <h2>Pets</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th><th>Species</th><th>Breed</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for pet in pets %}
+                <tr>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.species }}</td>
+                    <td>{{ pet.breed }}</td>
+                    <td>
+                        <a class="btn" href="{% url 'pet_edit' pet.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'pet_delete' pet.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="4">No pets found.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Appointments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Pet Name</th>
+                    <th>Species</th>
+                    <th>Reason</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.appointment_date|default:"N/A" }}</td>
+                    <td>{{ appointment.pet.name|default:"N/A" }}</td>
+                    <td>{{ appointment.pet.species|default:"N/A" }}</td>
+                    <td>{{ appointment.reason }}</td>
+                    <td>
+                        <a class="btn btn-danger" href="{% url 'appointment_delete' appointment.id %}">Cancel</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">No appointments found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

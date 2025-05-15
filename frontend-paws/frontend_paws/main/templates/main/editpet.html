@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'main/img/pet.png' %}">
+    <title>Edit Pet</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Pet</h1>
+
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Pet Name" value="{{ pet.name }}" required>
+            <input type="text" name="species" placeholder="Species" value="{{ pet.species }}" required>
+            <input type="text" name="breed" placeholder="Breed" value="{{ pet.breed }}" required>
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <button type="submit" class="btn">Update Pet</button>
+            <a href="{% url 'user_dashboard' %}" class="btn">Cancel</a>
+        </form>
+
+    </div>
+    <script src="{% static 'main/js/editpet.js' %}"></script>
+</body>
+</html>

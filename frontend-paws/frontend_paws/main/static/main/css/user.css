@@ -1,0 +1,33 @@
+body {
+    background-color: #f0f8ff;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+}
+.section-title {
+    border-bottom: 2px solid #4682b4;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    color: #2a5d88;
+}
+.navbar {
+    background-color: #4682b4;
+}
+.navbar-brand, .nav-link, .navbar-text {
+    color: white !important;
+}
+.btn-logout {
+    background-color: #f8f9fa;
+    color: #4682b4;
+    border: none;
+}
+.btn-logout:hover {
+    background-color: #e2e6ea;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
