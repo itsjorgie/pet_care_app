@@ -64,40 +64,51 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         // Validate login input
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Attempt to log the user in
-        if (Auth::attempt($credentials)) {
-        
-            $user = Auth::user();
-            
-            $token = $user->createToken('LoginToken')->plainTextToken;
-            
-            if ($user->role === 'admin') {
-                return response()->json([
-                    'message' => 'Login successful as admin',
-                    'role' => 'admin',
-                    'user' => $user,
-                    'token' => $token, 
-                ]);
-            }
+        // Check if user with the provided email exists
+        $user = User::where('email', $request->email)->first();
 
-            // Regular user login
+        if (!$user) {
             return response()->json([
-                'message' => 'Login successful as user',
-                'role' => 'user',
+                'status' => 'error',
+                'message' => 'Email not found',
+            ], 404);
+        }
+
+        // Check if password matches
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Incorrect password',
+            ], 401);
+        }
+
+        // Login the user
+        Auth::login($user);
+
+        $token = $user->createToken('LoginToken')->plainTextToken;
+
+        if ($user->role === 'admin') {
+            return response()->json([
+                'message' => 'Login successful as admin',
+                'role' => 'admin',
                 'user' => $user,
-                'token' => $token,  
+                'token' => $token,
             ]);
         }
 
         return response()->json([
-            'message' => 'Unauthorized',
-        ], 401);
+            'message' => 'Login successful as user',
+            'role' => 'user',
+            'user' => $user,
+            'token' => $token,
+        ]);
     }
+
 
     /**
      * Logout the user and revoke the API token.
