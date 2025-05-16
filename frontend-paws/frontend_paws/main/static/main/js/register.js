@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (e) {
         const nameRegex = /^[A-Za-z\s]{1,20}$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Common TLDs to check
+        const validTlds = ['com', 'edu', 'gov'];
 
         // Validate name
         if (!nameRegex.test(name.value)) {
@@ -21,6 +23,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!emailRegex.test(email.value)) {
             e.preventDefault();
             alert("Please enter a valid email format.");
+            email.focus();
+            return;
+        }
+
+        // Extract TLD from email and check if it is in the allowed list
+        const emailParts = email.value.split('.');
+        const tld = emailParts[emailParts.length - 1].toLowerCase();
+        if (!validTlds.includes(tld)) {
+            e.preventDefault();
+            alert(`Email domain TLD '.${tld}' is not valid. Please use a common domain like .com, .edu, .gov.`);
             email.focus();
             return;
         }

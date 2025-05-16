@@ -25,18 +25,35 @@ def landing_page(request):
 # Handles user registration form submission
 def register_page(request):
     if request.method == 'POST':
-        data = {
-            'name': request.POST['name'],
-            'email': request.POST['email'],
-            'password': request.POST['password'],
-            'password_confirmation': request.POST['password_confirmation'],
-            'role': request.POST.get('role', 'user'), 
-        }
-        response = requests.post(f'{API_BASE_URL}/register', data=data)
-        if response.status_code == 201:
-            return redirect('login')
-        error = response.json().get('message', 'Registration failed')
-        return render(request, 'main/register.html', {'error': error})
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password_confirmation = request.POST.get('password_confirmation')
+        role = 'user'  # Or set this based on form input if needed
+
+        try:
+            response = requests.post(f'{API_BASE_URL}/register', data={
+                'name': name,
+                'email': email,
+                'password': password,
+                'password_confirmation': password_confirmation,
+                'role': role,
+            })
+
+            if response.status_code == 201:
+                return redirect('login')
+
+            elif response.status_code == 400:
+                errors = response.json().get('errors', {})
+                for messages_list in errors.values():
+                    for msg in messages_list:
+                        messages.error(request, msg)
+            else:
+                messages.error(request, "Registration failed. Please try again.")
+
+        except requests.exceptions.RequestException:
+            messages.error(request, "Server error. Please try again later.")
+
     return render(request, 'main/register.html')
 
 # Handles user login
