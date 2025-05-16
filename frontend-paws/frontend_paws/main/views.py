@@ -66,7 +66,9 @@ def login_page(request):
                 else:
                     return redirect('user_dashboard')
             else:
-                messages.error(request, "Invalid credentials.")
+                error_message = response.json().get('message', 'Invalid credentials.')
+                messages.error(request, error_message)
+
         except requests.exceptions.RequestException:
             messages.error(request, "Server error. Please try again.")
 
