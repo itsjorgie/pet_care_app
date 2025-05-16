@@ -48,6 +48,7 @@ def register_page(request):
                 for messages_list in errors.values():
                     for msg in messages_list:
                         messages.error(request, msg)
+
             else:
                 messages.error(request, "Registration failed. Please try again.")
 
